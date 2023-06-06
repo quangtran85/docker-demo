@@ -1,0 +1,39 @@
+version: '3.1'
+
+services:
+  service01:
+    build:
+      context: service01
+      dockerfile: Dockerfile
+      target: dev
+    ports:
+      - 3100:3100
+    volumes:
+      - ./service01:/app
+    networks:
+      - services-demo
+    command: node index.js
+
+  service02:
+    build:
+      context: service02
+      dockerfile: Dockerfile
+      target: dev
+    ports:
+      - 3101:3101
+    volumes:
+      - ./service02:/app
+    networks:
+      - services-demo
+    command: node index.js
+
+  service03:
+    image: qtmsm/service01:v1.0.1
+    ports:
+      - 3102:3100
+    networks:
+      - services-demo
+
+networks:
+  services-demo:
+    driver: bridge

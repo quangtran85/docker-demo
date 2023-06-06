@@ -28,9 +28,9 @@ services:
     command: node index.js
 
   service03:
-    image: qtmsm/service01:v1.0.1
+    image: qtmsm/service03:v1.0.0
     ports:
-      - 3102:3100
+      - 3102:3102
     networks:
       - services-demo
 

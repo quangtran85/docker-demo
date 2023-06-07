@@ -7,7 +7,7 @@ services:
       dockerfile: Dockerfile
       target: dev
     ports:
-      - 3100:3100
+      - 3100:3000
     volumes:
       - ./service01:/app
     networks:
@@ -20,7 +20,7 @@ services:
       dockerfile: Dockerfile
       target: dev
     ports:
-      - 3101:3101
+      - 3101:3000
     volumes:
       - ./service02:/app
     networks:
@@ -28,11 +28,14 @@ services:
     command: node index.js
 
   service03:
-    image: qtmsm/service03:v1.0.0
+    image: qtmsm/service03:v1.0.4
     ports:
-      - 3102:3102
+      - 3102:3000
     networks:
       - services-demo
+    # environment:
+    #   - NODE_ENV=development
+    #   - MYSQL_HOST=mysql
 
 networks:
   services-demo:

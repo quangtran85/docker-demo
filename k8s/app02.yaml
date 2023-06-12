@@ -1,47 +1,53 @@
 apiVersion: v1
 kind: Service
 metadata:
-  name: demo-service02
+  name: app02-service
   labels:
-    app: demo
+    app: app02
 spec:
   ports:
-  - name: service02-service-port
+  - name: app02-service-port
     protocol: TCP
-    port: 3200
-    targetPort: http-web-svc2
+    port: 80
+    targetPort: 3000
   selector:
-    app: demo
-    tier: backend
-  type: NodePort
+    app: app02
+  # type: ClusterIP
 ---
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: demo-service02
+  name: app02-deployment
   labels:
-    app: backend
+    app: app02
 spec:
   replicas: 2
   selector:
     matchLabels:
-      app: demo
+      app: app02
       tier: backend
   strategy:
-    type: Recreate
+    type: RollingUpdate
   template:
     metadata:
       labels:
-        app: demo
+        app: app02
         tier: backend
     spec:
       containers:
       - image: qtmsm/service02:v1.0.2
-        name: backend
+        name: app02-container
+        resources:
+          requests:
+            memory: "128Mi"
+            cpu: "250m"
+          limits:
+            memory: "256Mi"
+            cpu: "500m"
         ports:
         - containerPort: 3000
           name: http-web-svc2
         env:
         - name: SRV1_HOST
-          value: "demo-service01:3100"
+          value: "app01-service"
 

@@ -3,7 +3,7 @@ secretGenerator:
   literals:
   - password=YOUR_PASSWORD
 resources:
-  - service01.yaml
-  - service02.yaml
-  - service03.yaml
+  - app01.yaml
+  - app02.yaml
+  - app03.yaml
   - ingress.yaml

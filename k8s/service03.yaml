@@ -1,0 +1,44 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: demo-service03
+  labels:
+    app: demo
+spec:
+  ports:
+  - name: service03-service-port
+    protocol: TCP
+    port: 3300
+    targetPort: http-web-svc3
+  selector:
+    app: demo
+    tier: backend
+  type: NodePort
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: demo-service03
+  labels:
+    app: backend
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: demo
+      tier: backend
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      labels:
+        app: demo
+        tier: backend
+    spec:
+      containers:
+      - image: qtmsm/service03:v1.0.6
+        name: backend
+        ports:
+        - containerPort: 3000
+          name: http-web-svc3
+

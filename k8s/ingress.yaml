@@ -1,0 +1,30 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: minimal-ingress
+spec:
+  ingressClassName: nginx
+  rules:
+  - http:
+      paths:
+      - path: /service01
+        pathType: Prefix
+        backend:
+          service:
+            name: demo-service01
+            port:
+              number: 3100
+      - path: /service02
+        pathType: Prefix
+        backend:
+          service:
+            name: demo-service02
+            port:
+              number: 3200
+      - path: /service03
+        pathType: Prefix
+        backend:
+          service:
+            name: demo-service03
+            port:
+              number: 3300

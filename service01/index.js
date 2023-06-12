@@ -2,7 +2,7 @@ const express = require('express')
 const app = express()
 const port = 3000
 
-app.get('/', (req, res) => {
+app.get('/service01', (req, res) => {
   res.send('<h1>Service 01!</h1><pre>' + JSON.stringify(process.env, null, 4))
 })
 

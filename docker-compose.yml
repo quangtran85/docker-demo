@@ -26,9 +26,11 @@ services:
     networks:
       - services-demo
     command: node index.js
+    environment:
+      - SRV1_HOST=service01:3000
 
   service03:
-    image: qtmsm/service03:v1.0.4
+    image: qtmsm/service03:v1.0.6
     ports:
       - 3102:3000
     networks:

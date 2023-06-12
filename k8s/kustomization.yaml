@@ -1,0 +1,9 @@
+secretGenerator:
+- name: mysql-pass
+  literals:
+  - password=YOUR_PASSWORD
+resources:
+  - service01.yaml
+  - service02.yaml
+  - service03.yaml
+  - ingress.yaml

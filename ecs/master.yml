@@ -1,0 +1,57 @@
+Resources:
+  ECS:
+    Type: AWS::CloudFormation::Stack
+    Properties:
+      TemplateURL: https://grevo-ecs-demo.s3.amazonaws.com/cluster.yml
+      Parameters:
+        DesiredCapacity: 1
+        MaxSize: 3
+        InstanceType: t2.micro
+
+  App01Service:
+    Type: AWS::CloudFormation::Stack
+    Properties:
+      TemplateURL: https://grevo-ecs-demo.s3.amazonaws.com/service.yml
+      Parameters:
+        ClusterName: !GetAtt ECS.Outputs.ClusterName
+        VpcID: !GetAtt ECS.Outputs.VPCId
+        PublicListener: !GetAtt ECS.Outputs.PublicListener
+        ServiceName: App01Service
+        ImageUrl: qtmsm/service01:v1.0.2-ecs
+        Path: /service01
+        ContainerMemory: 256
+        DesiredCount: 1
+        ContainerPort: 3000
+        Priority: 1
+
+  App02Service:
+    Type: AWS::CloudFormation::Stack
+    Properties:
+      TemplateURL: https://grevo-ecs-demo.s3.amazonaws.com/service.yml
+      Parameters:
+        ClusterName: !GetAtt ECS.Outputs.ClusterName
+        VpcID: !GetAtt ECS.Outputs.VPCId
+        PublicListener: !GetAtt ECS.Outputs.PublicListener
+        ServiceName: App02Service
+        ImageUrl: qtmsm/service02:v1.0.2-ecs
+        Path: /service02
+        ContainerMemory: 256
+        DesiredCount: 1
+        ContainerPort: 3000
+        Priority: 2
+
+  App03Service:
+    Type: AWS::CloudFormation::Stack
+    Properties:
+      TemplateURL: https://grevo-ecs-demo.s3.amazonaws.com/service.yml
+      Parameters:
+        ClusterName: !GetAtt ECS.Outputs.ClusterName
+        VpcID: !GetAtt ECS.Outputs.VPCId
+        PublicListener: !GetAtt ECS.Outputs.PublicListener
+        ServiceName: App03Service
+        ImageUrl: qtmsm/service03:v1.0.2-ecs
+        Path: /service03
+        ContainerMemory: 256
+        DesiredCount: 1
+        ContainerPort: 3000
+        Priority: 3

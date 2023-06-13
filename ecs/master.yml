@@ -33,7 +33,7 @@ Resources:
         VpcID: !GetAtt ECS.Outputs.VPCId
         PublicListener: !GetAtt ECS.Outputs.PublicListener
         ServiceName: App02Service
-        ImageUrl: qtmsm/service02:v1.0.2-ecs
+        ImageUrl: qtmsm/service02:v1.0.3-ecs
         Path: /service02
         ContainerMemory: 256
         DesiredCount: 1

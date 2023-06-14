@@ -5,8 +5,11 @@
 cd service01
 docker build -f Dockerfile -t qtmsm/service01:v1.0.1 .
 
-//or
+// or
 docker build -f Dockerfile -t qtmsm/service01:v1.0.1 --target=prod .
+
+// or using buildx which include push image
+docker buildx build --platform linux/amd64,linux/arm64,linux/arm/v7 --target=prod -t <username>/<image>:latest --push .
 ```
 
 ### Push image
